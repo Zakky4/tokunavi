@@ -1,15 +1,18 @@
+function main() {
+  const scriptProperties = PropertiesService.getScriptProperties();
+  const main_menu = scriptProperties.getProperty('MAIN_MENU_URL');
+  fetchFoods(main_menu);
+}
+
+// Cheerio
 function getContent_(url) {
   return UrlFetchApp.fetch(url).getContentText()
 }
 
 // フードメニューの情報を取得
-function fetchFoods() {
-  // メニューをスクレイピング
-  const scriptProperties = PropertiesService.getScriptProperties();
-  const main_menu = scriptProperties.getProperty('MAIN_MENU_URL');
-  const content = getContent_(main_menu);
+function fetchFoods(url) {
+  const content = getContent_(url);
   const $ = Cheerio.load(content);
-  // const foodList = $('.menulist_body-premium_burger > .menulist_lists > .menulist_list');
   const foodList = $('.menulist_list');
   const values = [];
   foodList.each(function () {
@@ -38,8 +41,6 @@ function fetchFoods() {
 
   // データを書き込み
   const lastRow = sheet.getLastRow();
-  // setRows = Math.trunc(values.length);
-  // sheet.getRange(lastRow + 1, 1, setRows, 2).setValues([values]);
   for (let i = 0; i < values.length; i++) {
     const menu = [
       values[i].title,
