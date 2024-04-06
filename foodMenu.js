@@ -1,8 +1,33 @@
 function main() {
+
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = ss.getSheetByName("メニュー");
+
+  // 見出しを除く既存データを一旦クリア
+  const rows = sheet.getLastRow() - 1; //カラム行はクリア対象外にしたいので-1
+  const columns = sheet.getLastColumn();
+  if (rows >= 1) {
+    const clearRange = sheet.getRange(2, 1, rows, columns);
+    clearRange.clear();
+  }
+
   const scriptProperties = PropertiesService.getScriptProperties();
+
+  // ハンバーガー
   const main_menu = scriptProperties.getProperty('MAIN_MENU_URL');
   const burgers = fetchFoods(main_menu);
   writeSheet(burgers);
+
+  // サイドメニュー
+  const side_menu = scriptProperties.getProperty('SIDE_MENU_URL');
+  const sides = fetchFoods(side_menu);
+  writeSheet(sides);
+
+  //　ドリンク 
+  const drink_menu = scriptProperties.getProperty('DRINK_MENU_URL');
+  const drinks = fetchFoods(drink_menu);
+  writeSheet(drinks);
+
 }
 
 // Cheerio
@@ -32,23 +57,13 @@ function fetchFoods(url) {
 
 }
 
-
 // スプレッドシート書き込み処理
 function writeSheet(results) {
 
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const sheet = ss.getSheetByName("メニュー");
-
-  // 見出しを除く既存データを一旦クリア
-  const rows = sheet.getLastRow() - 1; //カラム行はクリア対象外にしたいので-1
-  const columns = sheet.getLastColumn();
-  if (rows >= 1) {
-    const clearRange = sheet.getRange(2, 1, rows, columns);
-    clearRange.clear();
-  }
-
-  // データを書き込み
   const lastRow = sheet.getLastRow();
+
   for (let i = 0; i < results.length; i++) {
     const menu = [
       results[i].title,
