@@ -1,6 +1,4 @@
 // API設定部分
-// const OPENAI_APIKEY     = "sk-***********************************************";
-// const LINE_ACCESS_TOKEN = "***********************************************";
 const PROPS = PropertiesService.getScriptProperties();
 const OPENAI_APIKEY = PROPS.getProperty('OPENAI_APIKEY');
 const LINE_ACCESS_TOKEN = PROPS.getProperty('LINE_ACCESS_TOKEN');

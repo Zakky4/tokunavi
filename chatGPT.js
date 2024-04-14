@@ -1,5 +1,5 @@
 function chatGPT(prompt) {
-  prompt = "こんにちは";
+  // prompt = "こんにちは";
   const constraints = SHEET.getRange(1, 1).getValue(); // 制約
   // totalMessages.unshift({"role": "system", "content": constraints});
   const requestOptions = {
@@ -20,8 +20,8 @@ function chatGPT(prompt) {
   const response = UrlFetchApp.fetch(CHAT_GPT_URL, requestOptions);
   const responseText = response.getContentText();
   const json = JSON.parse(responseText);
-  // console.log(json);
+  // Logger.log(json);
   return_text = json["choices"][0]["message"]["content"].trim();
-  Logger.log(`出力メッセージ：${return_text}`);
+  // Logger.log(`出力メッセージ：${return_text}`);
   return return_text;
 }
