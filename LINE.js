@@ -24,10 +24,13 @@ function doPost(e) {
   const replyText = chatGPT(postMessage);
   // const totalMessages = chatGPTLog(sheetId, postMessage);
   // const replyText = chatGPT(totalMessages);
+  
   sendMessage(replyToken, replyText);
+  
   // ログに追加
   debugLog(lineUserId, postMessage, replyText); // 大元の「ログ」シートに追加
   debugLogIndividual(sheetId, postMessage, replyText); // 個別の「ログ」シートに追加
+  
   return;
 }
 
