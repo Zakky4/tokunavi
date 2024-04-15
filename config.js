@@ -12,7 +12,7 @@ const CHAT_GPT_VER   = "gpt-3.5-turbo-1106"; // 一度のやり取りで16000ト
 // スプレッドシートの情報
 const SS         = SpreadsheetApp.getActiveSpreadsheet();
 const SHEET      = SS.getSheetByName('制約');
-const SHEET_LOG  = SS.getSheetByName('ログ'); // 追加
-const SHEET_USER = SS.getSheetByName('ユーザー'); // 追加
+const SHEET_LOG  = SS.getSheetByName('ログ');
+const SHEET_USER = SS.getSheetByName('ユーザー');
 
 const MAX_COUNT_LOG = 3; // 過去のLINEでのメッセージを遡る回数
