@@ -1,4 +1,4 @@
-function chatGPT(prompt) {
+function chatGPT(totalMessages) {
   // prompt = "こんにちは";
   const constraints = SHEET.getRange(1, 1).getValue(); // 制約
   // totalMessages.unshift({"role": "system", "content": constraints});
@@ -10,11 +10,11 @@ function chatGPT(prompt) {
     },
     payload: JSON.stringify({
       model: CHAT_GPT_VER,
-      // "messages": totalMessages,
-      messages: [
-        { role: "system", content: constraints }, // Who you are?
-        { role: "user", content: prompt }, // prompt
-      ],
+      "messages": totalMessages,
+      // messages: [
+      //   { role: "system", content: constraints }, // Who you are?
+      //   { role: "user", content: prompt }, // prompt
+      // ],
     }),
   };
   const response = UrlFetchApp.fetch(CHAT_GPT_URL, requestOptions);

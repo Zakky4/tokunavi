@@ -21,10 +21,9 @@ function doPost(e) {
     return sendMessage(replyToken, "まだ文章しか認識できません。申し訳ございません。");
   
   // データ生成＆LINEに送信
-  const replyText = chatGPT(postMessage);
-  // const totalMessages = chatGPTLog(sheetId, postMessage);
-  // const replyText = chatGPT(totalMessages);
-  
+  const totalMessages = chatGPTLog(sheetId, postMessage);
+  // const replyText = chatGPT(postMessage);
+  const replyText = chatGPT(totalMessages);
   sendMessage(replyToken, replyText);
   
   // ログに追加
